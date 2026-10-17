@@ -63,6 +63,32 @@ To verify the success of the G-buffer pass, I rendered the data stored in the al
 </table>
 
 ## Performance Analysis
+To analyze performance, I recorded average time in milliseconds for each method given a set of parameters. Unless noted otherwise, tests use 1000 lights, light radius 2, and 64 x 64 x 32 cluster grid. 
+
+### 1. Number of Lights 
+| Method | 500 | 1000 | 2000 | 3000 |
+|---|---|---|---|---|
+| Naive | 83.3 ms | 166.7 ms | 333.3 ms | 500.0 ms |
+| Forward+ | 58.8 ms | 58.8 ms | 66.7 ms | 71.4 ms |
+| Clustered Deferred | 11.6 ms | 12.2 ms | 14.1 ms | 15.4 ms |
+
+- **Naive:** Performance declines with light count; this is expected, given that naive simply computes lighting by iterating through complete light list.
+- **Forward+:** Performance declines less dramatically than the naive method. This is also expected, as number of lights per cluster changes less dramatically than the total light count.
+- **Clustered Deferred:** Time in ms is significantly lower across all light counts and performance scales reasonably with increasing number of lights. 
+
+### 2. Light Radius 
+| Method | 2 | 4 | 6 | 10 |
+|---|---|---|---|---|
+| Naive | 166.7 ms | 166.7 ms | 166.7 ms | 166.7 ms |
+| Forward+ | 58.8 ms | 83.3 ms | 90.9 ms | 90.9 ms |
+| Clustered Deferred | 12.2 ms | 16.1 ms | 19.2 ms | 19.2 ms |
+
+- **Naive:** Average time is unaffected by radius. No matter how big lights are, the cost of computing light contribution remains the same because we're always iterating through the total number of lights in the scene.
+- **Forward+ and Clustered Deferred:** Both slow down as radius increases. Larger lights overlap more clusters, and the light list for each fragment increases. This is a weakness of using clusters; as light radius increases, clustered methods approach naive behavior (imagine huge lights that overlap every cluster! every fragment would have to iterate through every light).
+
+### 3. Cluster Grid Size 
+
+Performance remained essentially constant over different cluster grid sizes. This reflects the tradeoff between having fewer clusters and having a shorter light list for each cluster. 
 
 ### Credits
 
