@@ -4,7 +4,7 @@ WebGL Forward+ and Clustered Deferred Shading
 **University of Pennsylvania, CIS 565: GPU Programming and Architecture, Project 4**
 
 * Grace Tan
-* Tested on: (TODO) **Google Chrome 222.2** on
+* Tested on: **Google Chrome 222.2** on
  Windows 11 Home 25H2 (Build 26200), AMD Ryzen 9 8945HX @ 2.50GHz, 16GB RAM, NVIDIA GeForce RTX 5060 Laptop GPU 8GB
 
 ## Live Demo
