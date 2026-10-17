@@ -9,14 +9,11 @@
 //     - Convert these screen and depth bounds into view-space coordinates.
 //     - Store the computed bounding box (AABB) for the cluster.
 
-// define structs for loading values in 
-
 struct AABB {
 	min: vec3f,
 	max: vec3f
 }
 
-// parameters 
 @group(0) @binding(0) var<uniform> camUnifs: CameraUniforms;
 @group(0) @binding(1) var<uniform> canvasRes: CanvasResolution;
 @group(0) @binding(2) var<uniform> clusterInfo: ClusterInfo;

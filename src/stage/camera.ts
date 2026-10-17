@@ -3,7 +3,7 @@ import { toRadians } from "../math_util";
 import { device, canvas, fovYDegrees, aspectRatio } from "../renderer";
 
 class CameraUniforms {
-    readonly buffer = new ArrayBuffer(48 * 4);
+    readonly buffer = new ArrayBuffer(64 * 4);
     // 16 element array of floats 
     // readonly = cannot reassign to different chunk of memory 
     private readonly floatView = new Float32Array(this.buffer);
@@ -22,6 +22,10 @@ class CameraUniforms {
 
     set invProjMat(mat: Float32Array) {
         this.floatView.set(mat, 32);
+    }
+
+    set invViewProjMat(mat: Float32Array) {
+        this.floatView.set(mat, 48);
     }
 }
 
@@ -148,6 +152,7 @@ export class Camera {
         const viewMat = mat4.lookAt(this.cameraPos, lookPos, [0, 1, 0]);
         const viewProjMat = mat4.mul(this.projMat, viewMat);
         const invProjMat = mat4.inverse(this.projMat);
+        const invViewProjMat = mat4.inverse(viewProjMat);
 
         // TODO-1.1: set `this.uniforms.viewProjMat` to the newly calculated view proj mat
         this.uniforms.viewProjMat = viewProjMat;
@@ -155,6 +160,7 @@ export class Camera {
         // TODO-2: write to extra buffers needed for light clustering here
         this.uniforms.viewMat = viewMat;
         this.uniforms.invProjMat = invProjMat;
+        this.uniforms.invViewProjMat = invViewProjMat;
 
         // TODO-1.1: upload `this.uniforms.buffer` (host side) to `this.uniformsBuffer` (device side)
         // check `lights.ts` for examples of using `device.queue.writeBuffer()`

@@ -9,7 +9,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
     // TODO-2: add layouts, pipelines, textures, etc. needed for Forward+ here
     // you may need extra uniforms such as the camera view matrix and the canvas resolution
 
-    fowardPlusBindGroupLayout: GPUBindGroupLayout; 
+    forwardPlusBindGroupLayout: GPUBindGroupLayout; 
     forwardPlusBindGroup: GPUBindGroup; 
 
     depthTexture: GPUTexture;
