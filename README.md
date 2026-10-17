@@ -13,7 +13,14 @@ WebGL Forward+ and Clustered Deferred Shading
 
 ### Demo Video/GIF
 
-[![](img/video.mp4)](TODO)
+<table>
+  <tr>
+    <td align="center">
+      <img src="img/naive.mp4" width="600"><br>
+      <em>Naive, 500 lights</em>
+    </td>
+  </tr>
+</table>
 
 ### (TODO: Your README)
 
